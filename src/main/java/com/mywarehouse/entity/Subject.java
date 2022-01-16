@@ -1,14 +1,17 @@
 package com.mywarehouse.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "subject")
 public class Subject {
@@ -21,17 +24,23 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
+    @ManyToMany(mappedBy = "subjects")
+    private List<Student> students;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Mark> marks;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subject subject = (Subject) o;
-        return Objects.equals(id, subject.id) && Objects.equals(name, subject.name);
+        return Objects.equals(id, subject.id) && Objects.equals(name, subject.name) && Objects.equals(students, subject.students) && Objects.equals(marks, subject.marks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, students, marks);
     }
 
     @Override
@@ -39,6 +48,8 @@ public class Subject {
         return "Subject{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", students=" + students +
+                ", marks=" + marks +
                 '}';
     }
 }
