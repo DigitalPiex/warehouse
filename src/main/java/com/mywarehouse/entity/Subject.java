@@ -6,8 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 import java.util.Objects;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,16 +15,23 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "subject")
 public class Subject {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
-    @Pattern(regexp="[a-zA-Z]")
+    @Pattern(regexp = "[a-zA-Z]")
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "subjects")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "student_subject",
+            joinColumns = @JoinColumn(name = "subject_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
     private List<Student> students;
 
     @OneToMany(mappedBy = "subject")

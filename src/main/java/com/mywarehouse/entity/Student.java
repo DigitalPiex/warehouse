@@ -10,24 +10,30 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Table(name = "student")
 public class Student {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
-    @Pattern(regexp="[a-zA-Z]")
+    @Pattern(regexp = "[a-zA-Z]")
     @Column(name = "surname")
     private String surname;
 
     @OneToMany(mappedBy = "student")
     private List<Mark> marks;
 
-    @ManyToMany(mappedBy = "students")
-    private List<Subject> subjects = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "student_subject",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private List<Subject> subjects;
 
     @Override
     public boolean equals(Object o) {
