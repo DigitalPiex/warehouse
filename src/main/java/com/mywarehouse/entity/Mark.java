@@ -42,12 +42,12 @@ public class Mark {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mark mark = (Mark) o;
-        return value == mark.value && Objects.equals(id, mark.id) && Objects.equals(student, mark.student) && Objects.equals(subject, mark.subject);
+        return value == mark.value && Objects.equals(id, mark.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, value, student, subject);
+        return Objects.hash(id, value);
     }
 
     @Override

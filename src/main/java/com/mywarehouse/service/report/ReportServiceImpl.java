@@ -6,25 +6,36 @@ import com.mywarehouse.report.ReportResponse;
 import com.mywarehouse.report.StudentReport;
 import com.mywarehouse.report.SubjectReport;
 import com.mywarehouse.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Service
 public class ReportServiceImpl implements ReportService {
+
     private final StudentRepository studentRepository;
 
+    @Autowired
     public ReportServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     @Override
-    public ReportResponse generateReport() {
+    public ReportResponse generateReport(String studentName) {
         List<Student> studentList = StreamSupport
                 .stream(studentRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
 
-        ReportResponse reportResponse = new ReportResponse();
+        if (StringUtils.hasText(studentName)) {
+            studentList = studentList.stream()
+                    .filter(currentStudent -> currentStudent.getSurname().equals(studentName))
+                    .collect(Collectors.toList());
+        }
+
         List<StudentReport> studentReports = studentList.stream()
                 .map(student ->
                         new StudentReport(
@@ -48,12 +59,8 @@ public class ReportServiceImpl implements ReportService {
                 .sorted()
                 .collect(Collectors.toList());
 
+        ReportResponse reportResponse = new ReportResponse();
         reportResponse.setStudentReport(studentReports);
         return reportResponse;
-    }
-
-    @Override
-    public ReportResponse generateReport(String name) {
-        return null;
     }
 }

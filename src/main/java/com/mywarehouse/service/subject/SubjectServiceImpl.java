@@ -1,10 +1,22 @@
 package com.mywarehouse.service.subject;
 
 import com.mywarehouse.entity.Subject;
+import com.mywarehouse.repository.SubjectRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SubjectServiceImpl implements SubjectService {
+
+    SubjectRepository subjectRepository;
+
+    @Autowired
+    public SubjectServiceImpl(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
+
     @Override
     public Subject findSubjectById(Long id) {
         return null;
