@@ -5,6 +5,7 @@ import com.mywarehouse.repository.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -23,7 +24,17 @@ public class MarkServiceImpl implements MarkService {
     }
 
     @Override
+    public List<Mark> findAll() {
+        return markRepository.findAll();
+    }
+
+    @Override
     public Mark save(Mark mark) {
         return markRepository.save(mark);
+    }
+
+    @Override
+    public void delete(Long id) {
+        markRepository.deleteById(id);
     }
 }

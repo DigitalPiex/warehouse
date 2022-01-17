@@ -5,15 +5,11 @@ import com.mywarehouse.entity.Subject;
 import java.util.List;
 
 public interface SubjectService {
-    Subject findSubjectById(Long id);
-    
-    Subject findSubjectByName(String name);
+    Subject findById(Long id);
 
-    List<Subject> findAllSubjects();
+    List<Subject> findAll();
 
-    Subject saveSubject(Subject subject);
+    Subject save(Subject subject);
 
-    void updateSubject(Long id, Subject subject);
-
-    void deleteSubject(Long id);
+    void delete(Long id);
 }

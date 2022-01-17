@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -18,32 +19,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findStudentById(Long id) {
-        return null;
+    public Student findById(Long id) {
+        return studentRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     @Override
-    public Student findStudentBySurname(String surname) {
-        return null;
+    public Student findBySurname(String surname) {
+        return studentRepository.findBySurname(surname);
     }
 
     @Override
-    public List<Student> findAllStudents() {
-        return null;
+    public List<Student> findAll() {
+        return studentRepository.findAll();
     }
 
     @Override
-    public Student saveStudent(Student student) {
-        return null;
+    public Student save(Student student) {
+        return studentRepository.save(student);
     }
 
     @Override
-    public void updateStudent(Long id, Student student) {
-
-    }
-
-    @Override
-    public void deleteStudent(Long id) {
-
+    public void delete(Long id) {
+        studentRepository.deleteById(id);
     }
 }

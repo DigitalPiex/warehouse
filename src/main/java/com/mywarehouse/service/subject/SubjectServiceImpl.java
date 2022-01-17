@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -18,32 +19,22 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public Subject findSubjectById(Long id) {
-        return null;
+    public Subject findById(Long id) {
+        return subjectRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     @Override
-    public Subject findSubjectByName(String name) {
-        return null;
+    public List<Subject> findAll() {
+        return subjectRepository.findAll();
     }
 
     @Override
-    public List<Subject> findAllSubjects() {
-        return null;
+    public Subject save(Subject subject) {
+        return subjectRepository.save(subject);
     }
 
     @Override
-    public Subject saveSubject(Subject subject) {
-        return null;
-    }
-
-    @Override
-    public void updateSubject(Long id, Subject subject) {
-
-    }
-
-    @Override
-    public void deleteSubject(Long id) {
-
+    public void delete(Long id) {
+        subjectRepository.deleteById(id);
     }
 }

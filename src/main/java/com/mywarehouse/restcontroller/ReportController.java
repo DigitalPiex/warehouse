@@ -3,6 +3,7 @@ package com.mywarehouse.restcontroller;
 import com.mywarehouse.report.ReportResponse;
 import com.mywarehouse.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,6 @@ public class ReportController {
     @GetMapping("/report")
     public ResponseEntity<ReportResponse> getReportService(@RequestParam(required = false) String studentName) {
         ReportResponse reportResponse = reportService.generateReport(studentName);
-        return ResponseEntity.ok(reportResponse);
+        return ResponseEntity.status(HttpStatus.OK).body(reportResponse);
     }
 }

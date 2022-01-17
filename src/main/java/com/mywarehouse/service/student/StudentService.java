@@ -5,15 +5,13 @@ import com.mywarehouse.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    Student findStudentById(Long id);
+    Student findById(Long id);
 
-    Student findStudentBySurname(String surname);
+    Student findBySurname(String surname);
 
-    List<Student> findAllStudents();
+    List<Student> findAll();
 
-    Student saveStudent(Student student);
+    Student save(Student student);
 
-    void updateStudent(Long id, Student student);
-
-    void deleteStudent(Long id);
+    void delete(Long id);
 }
