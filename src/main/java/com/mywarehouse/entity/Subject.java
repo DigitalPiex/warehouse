@@ -6,8 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -21,7 +21,7 @@ public class Subject {
     @Column(name = "id")
     private Long id;
 
-    @Pattern(regexp = "[a-zA-Z]")
+    @Pattern(regexp = "[a-zA-Z]+")
     @Column(name = "name")
     private String name;
 

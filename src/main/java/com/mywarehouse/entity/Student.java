@@ -1,10 +1,14 @@
 package com.mywarehouse.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -19,7 +23,7 @@ public class Student {
     @Column(name = "id")
     private Long id;
 
-    @Pattern(regexp = "[a-zA-Z]")
+    @Pattern(regexp = "[a-zA-Z]+")
     @Column(name = "surname")
     private String surname;
 
