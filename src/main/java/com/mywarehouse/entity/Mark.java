@@ -1,5 +1,6 @@
 package com.mywarehouse.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "mark")
 public class Mark {
 
@@ -33,10 +35,6 @@ public class Mark {
     @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
-
-    public Mark(int value) {
-        this.value = value;
-    }
 
     @Override
     public boolean equals(Object o) {

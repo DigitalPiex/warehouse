@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("mark/v1")
+@RequestMapping("/mark/v1")
 public class MarkController {
 
     private final MarkService markService;
